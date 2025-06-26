@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>70-Day Placement Preparation Planner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .phase-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .phase-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .phase-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .phase-section {
+            display: none;
+            margin-bottom: 40px;
+        }
+        
+        .phase-section.active {
+            display: block;
+        }
+        
+        .phase-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        tr:nth-child(even) {
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        tr:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transition: background 0.3s ease;
+        }
+        
+        .day-cell {
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+            width: 60px;
+        }
+        
+        .topic-cell {
+            min-width: 200px;
+        }
+        
+        .rest-day {
+            background: rgba(255, 193, 7, 0.1) !important;
+            font-style: italic;
+            color: #856404;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #667eea;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .phase-selector {
+                flex-direction: column;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 70-Day Placement Preparation Planner</h1>
+            <p class="subtitle">Complete CS Undergrad Interview & Exam Preparation</p>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-primary" onclick="exportToCSV()">📊 Export to CSV</button>
+            <button class="btn btn-secondary" onclick="markProgress()">✅ Mark Day Complete</button>
+            <button class="btn btn-secondary" onclick="resetProgress()">🔄 Reset Progress</button>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalDays">70</div>
+                <div class="stat-label">Total Days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completedDays">0</div>
+                <div class="stat-label">Completed Days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="remainingDays">70</div>
+                <div class="stat-label">Remaining Days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="progressPercent">0%</div>
+                <div class="stat-label">Progress</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+        
+        <div class="phase-selector">
+            <button class="phase-btn active" onclick="showPhase(1)">Phase 1: Foundation (Days 1-14)</button>
+            <button class="phase-btn" onclick="showPhase(2)">Phase 2: Core DS (Days 15-28)</button>
+            <button class="phase-btn" onclick="showPhase(3)">Phase 3: Advanced (Days 29-42)</button>
+            <button class="phase-btn" onclick="showPhase(4)">Phase 4: Mastery (Days 43-60)</button>
+            <button class="phase-btn" onclick="showPhase(5)">Phase 5: Final Sprint (Days 61-70)</button>
+        </div>
+        
+        <!-- Phase 1: Foundation -->
+        <div id="phase1" class="phase-section active">
+            <h2 class="phase-title">Phase 1: Foundations & Fundamentals (Days 1-14)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>DSA (2 hrs)</th>
+                            <th>Aptitude (1 hr)</th>
+                            <th>Core CS (1.5 hrs)</th>
+                            <th>System Design (1 hr)</th>
+                            <th>HR/Soft Skills (30 mins)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="day-cell">1</td>
+                            <td class="topic-cell">Arrays: Introduction, Two Sum, Maximum Subarray (Kadane's)</td>
+                            <td>Number Systems: Binary, Decimal, Octal, Hexadecimal conversions</td>
+                            <td>OS: Introduction, Process vs Thread, Process States</td>
+                            <td>Scalability Basics: Horizontal vs Vertical Scaling</td>
+                            <td>Create/Update LinkedIn profile, Professional headline</td>
+                            <td>
+                                <select class="status-select" data-day="1">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">2</td>
+                            <td class="topic-cell">Arrays: Rotate Array, Container With Most Water, Best Time to Buy/Sell</td>
+                            <td>HCF & LCM: Euclidean algorithm, Problems</td>
+                            <td>OS: CPU Scheduling - FCFS, SJF, Priority Scheduling</td>
+                            <td>Load Balancing: Round Robin, Weighted, Consistent Hashing</td>
+                            <td>Resume building: Format, Structure, ATS optimization</td>
+                            <td>
+                                <select class="status-select" data-day="2">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">3</td>
+                            <td class="topic-cell">Strings: Valid Palindrome, Reverse String, Anagrams</td>
+                            <td>Percentages: Basic calculations, Profit/Loss basics</td>
+                            <td>OS: Round Robin, Multilevel Queue Scheduling</td>
+                            <td>Caching: In-memory, Distributed, Cache Strategies</td>
+                            <td>Company research: Top 10 target companies, values, culture</td>
+                            <td>
+                                <select class="status-select" data-day="3">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">4</td>
+                            <td class="topic-cell">Strings: Longest Substring Without Repeating, String Matching</td>
+                            <td>Profit & Loss: Advanced problems, Discount, Markup</td>
+                            <td>OS: Deadlocks - Prevention, Avoidance, Detection</td>
+                            <td>Database Scaling: Replication, Sharding, ACID properties</td>
+                            <td>LinkedIn networking: Connect with 10 professionals</td>
+                            <td>
+                                <select class="status-select" data-day="4">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">5</td>
+                            <td class="topic-cell">Hashing: HashMap basics, Two Sum variations, Frequency counting</td>
+                            <td>Simple & Compound Interest: Formulas, Applications</td>
+                            <td>OS: Memory Management - Paging, Segmentation</td>
+                            <td>Microservices vs Monolithic: Pros, Cons, When to use</td>
+                            <td>Elevator pitch: "Tell me about yourself" (2-3 versions)</td>
+                            <td>
+                                <select class="status-select" data-day="5">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">6</td>
+                            <td class="topic-cell">Hashing: Group Anagrams, Longest Consecutive Sequence</td>
+                            <td>Averages: Weighted averages, Mean, Median, Mode</td>
+                            <td>OS: Virtual Memory, Thrashing, Page Replacement</td>
+                            <td>API Design: REST principles, HTTP methods, Status codes</td>
+                            <td>Mock interview practice: Record yourself answering common questions</td>
+                            <td>
+                                <select class="status-select" data-day="6">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">7</td>
+                            <td class="topic-cell">Revision: Solve 5 mixed problems from Arrays, Strings, Hashing</td>
+                            <td>Practice Test: Number systems, Percentages, P&L</td>
+                            <td>OS Revision: Practice MCQs, Conceptual questions</td>
+                            <td>Case Study: Design a URL Shortener (Basic)</td>
+                            <td>Weekend reflection: Assess week 1 progress, plan improvements</td>
+                            <td>
+                                <select class="status-select" data-day="7">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">8</td>
+                            <td class="topic-cell">Two Pointers: Valid Palindrome, Merge Sorted Arrays</td>
+                            <td>Ratio & Proportion: Direct, Inverse proportions</td>
+                            <td>DBMS: Introduction, RDBMS vs NoSQL, Data Models</td>
+                            <td>SQL vs NoSQL: When to use each, Examples</td>
+                            <td>Project documentation: Prepare detailed project descriptions</td>
+                            <td>
+                                <select class="status-select" data-day="8">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">9</td>
+                            <td class="topic-cell">Two Pointers: 3Sum, Two Sum II, Remove Duplicates</td>
+                            <td>Mixtures & Alligations: Rule of alligation, Problems</td>
+                            <td>DBMS: ER Diagrams, Normalization (1NF, 2NF, 3NF)</td>
+                            <td>Database Indexing: B-trees, Hash indexes, Performance</td>
+                            <td>STAR method: Prepare 5 behavioral question answers</td>
+                            <td>
+                                <select class="status-select" data-day="9">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">10</td>
+                            <td class="topic-cell">Sliding Window: Max Sum Subarray, Longest Substring problems</td>
+                            <td>Time, Speed & Distance: Basic formulas, Relative speed</td>
+                            <td>SQL: DDL, DML, DCL commands, SELECT operations</td>
+                            <td>Transactions: ACID, Isolation levels, Concurrency control</td>
+                            <td>Salary negotiation: Research market rates, prepare talking points</td>
+                            <td>
+                                <select class="status-select" data-day="10">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">11</td>
+                            <td class="topic-cell">Sliding Window: Min Window Substring, Permutation in String</td>
+                            <td>Time & Work: Individual rates, Combined work, Pipes & Cisterns</td>
+                            <td>SQL: JOINs (INNER, LEFT, RIGHT, FULL), Subqueries</td>
+                            <td>Message Queues: Pub/Sub, Kafka, RabbitMQ basics</td>
+                            <td>Portfolio website: Plan structure, key sections</td>
+                            <td>
+                                <select class="status-select" data-day="11">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">12</td>
+                            <td class="topic-cell">Stack: Valid Parentheses, Next Greater Element</td>
+                            <td>Probability: Basic concepts, Conditional probability</td>
+                            <td>SQL: Aggregate functions, GROUP BY, HAVING, Window functions</td>
+                            <td>Security: Authentication vs Authorization, JWT, OAuth</td>
+                            <td>Interview attire: Professional wardrobe, virtual interview setup</td>
+                            <td>
+                                <select class="status-select" data-day="12">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">13</td>
+                            <td class="topic-cell">Stack: Largest Rectangle in Histogram, Daily Temperatures</td>
+                            <td>Permutation & Combination: nPr, nCr, Applications</td>
+                            <td>DBMS: Transactions, Locking, Concurrency control</td>
+                            <td>Performance: Latency vs Throughput, Monitoring</td>
+                            <td>Thank you notes: Email templates, LinkedIn follow-ups</td>
+                            <td>
+                                <select class="status-select" data-day="13">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="rest-day">
+                            <td class="day-cell">14</td>
+                            <td class="topic-cell">Rest Day / Catch-up</td>
+                            <td>Practice comprehensive test</td>
+                            <td>Review and practice</td>
+                            <td>System design practice</td>
+                            <td>Week 2 reflection and planning</td>
+                            <td>
+                                <select class="status-select" data-day="14">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Phase 2: Core Data Structures -->
+        <div id="phase2" class="phase-section">
+            <h2 class="phase-title">Phase 2: Core Data Structures & Algorithms (Days 15-28)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>DSA (2 hrs)</th>
+                            <th>Aptitude (1 hr)</th>
+                            <th>Core CS (1.5 hrs)</th>
+                            <th>System Design (1 hr)</th>
+                            <th>HR/Soft Skills (30 mins)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="day-cell">15</td>
+                            <td class="topic-cell">Binary Search: Basic template, Search in Sorted Array</td>
+                            <td>Data Interpretation: Tables, Bar charts, Pie charts</td>
+                            <td>Networks: OSI Model, TCP/IP, HTTP/HTTPS</td>
+                            <td>Design Chat Application: Basic architecture</td>
+                            <td>Confidence building: Power posing, positive self-talk</td>
+                            <td>
+                                <select class="status-select" data-day="15">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">16</td>
+                            <td class="topic-cell">Binary Search: Search in Rotated Array, Peak Element</td>
+                            <td>Logical Reasoning: Blood relations, Direction sense</td>
+                            <td>Networks: DNS, DHCP, NAT, Subnetting basics</td>
+                            <td>Design Twitter Feed: Timeline generation</td>
+                            <td>Communication skills: Clarity, conciseness, active listening</td>
+                            <td>
+                                <select class="status-select" data-day="16">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">17</td>
+                            <td class="topic-cell">Linked Lists: Reverse, Merge, Detect Cycle</td>
+                            <td>Seating Arrangement: Linear, Circular arrangements</td>
+                            <td>Networks: TCP vs UDP, Socket programming concepts</td>
+                            <td>Design Instagram: Photo upload, storage, CDN</td>
+                            <td>Teamwork examples: Prepare 3 detailed STAR stories</td>
+                            <td>
+                                <select class="status-select" data-day="17">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">18</td>
+                            <td class="topic-cell">Linked Lists: Intersection, Palindrome, Reorder List</td>
+                            <td>Puzzles: Logic puzzles, Mathematical puzzles</td>
+                            <td>OOP: Classes, Objects, Inheritance, Polymorphism</td>
+                            <td>Design Uber: Ride matching, ETA calculation</td>
+                            <td>Leadership examples: Times you took initiative</td>
+                            <td>
+                                <select class="status-select" data-day="18">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">19</td>
+                            <td class="topic-cell">Trees: Traversals, Height, Diameter problems</td>
+                            <td>Coding-Decoding: Number coding, Letter coding</td>
+                            <td>OOP: Encapsulation, Abstraction, Design patterns intro</td>
+                            <td>Design YouTube: Video streaming, recommendations</td>
+                            <td>Problem-solving: Analytical thinking, root cause analysis</td>
+                            <td>
+                                <select class="status-select" data-day="19">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">20</td>
+                            <td class="topic-cell">Trees: Validate BST, Lowest Common Ancestor</td>
+                            <td>Series: Number series, Letter series, Mixed series</td>
+                            <td>Design Patterns: Singleton, Observer, Factory</td>
+                            <td>Design WhatsApp: Message delivery, online status</td>
+                            <td>Adaptability: Examples of handling change, learning new skills</td>
+                            <td>
+                                <select class="status-select" data-day="20">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">21</td>
+                            <td class="topic-cell">Trees: Serialize/Deserialize, Path Sum problems</td>
+                            <td>Analogies: Verbal analogies, Number analogies</td>
+                            <td>Software Engineering: SDLC, Agile, Scrum, Testing</td>
+                            <td>Design Dropbox: File storage, synchronization</td>
+                            <td>Mock interview: Full technical interview simulation</td>
+                            <td>
+                                <select class="status-select" data-day="21">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="rest-day">
+                            <td class="day-cell">22</td>
+                            <td class="topic-cell">Rest Day / Revision</td>
+                            <td>Comprehensive aptitude test</td>
+                            <td>Review week's concepts</td>
+                            <td>System design case study review</td>
+                            <td>Feedback analysis and improvement planning</td>
+                            <td>
+                                <select class="status-select" data-day="22">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">23</td>
+                            <td class="topic-cell">Heap: Priority Queue, Kth Largest/Smallest</td>
+                            <td>Calendar & Clock: Date calculations, Age problems</td>
+                            <td>Version Control: Git basics, Branching, Merging</td>
+                            <td>Design Netflix: Content delivery, recommendation engine</td>
+                            <td>Industry knowledge: Latest tech trends, company news</td>
+                            <td>
+                                <select class="status-select" data-day="23">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">24</td>
+                            <td class="topic-cell">Heap: Merge K Sorted Lists, Top K Frequent Elements</td>
+                            <td>Venn Diagrams: Set theory, Intersection problems</td>
+                            <td>Git: Merge conflicts, Rebase, Cherry-pick, Hooks</td>
+                            <td>Design Amazon: Product catalog, search, recommendations</td>
+                            <td>Questions to ask interviewers: Prepare 10 thoughtful questions</td>
+                            <td>
+                                <select class="status-select" data-day="24">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">25</td>
+                            <td class="topic-cell">Tries: Implement Trie, Word Search, Prefix matching</td>
+                            <td>Cubes & Dice: Cube counting, Dice problems</td>
+                            <td>Testing: Unit testing, Integration testing, TDD</td>
+                            <td>Design Food Delivery: Order management, delivery tracking</td>
+                            <td>Salary expectations: How to discuss compensation</td>
+                            <td>
+                                <select class="status-select" data-day="25">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">26</td>
+                            <td class="topic-cell">Backtracking: N-Queens, Generate Parentheses</td>
+                            <td>Water & Mixture: Concentration, Dilution problems</td>
+                            <td>Software Architecture: MVC, Microservices, Clean Architecture</td>
+                            <td>Design Parking Lot: OOP approach, system components</td>
+                            <td>Negotiation skills: Win-win scenarios, BATNA</td>
+                            <td>
+                                <select class="status-select" data-day="26">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">27</td>
+                            <td class="topic-cell">Backtracking: Sudoku Solver, Permutations, Combinations</td>
+                            <td>Boats & Streams: Upstream, Downstream, Still water</td>
+                            <td>API Design: REST vs GraphQL, Documentation, Versioning</td>
+                            <td>Design Library Management: Book tracking, user management</td>
+                            <td>Presentation skills: Structure, delivery, handling questions</td>
+                            <td>
+                                <select class="status-select" data-day="27">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="rest-day">
+                            <td class="day-cell">28</td>
+                            <td class="topic-cell">Comprehensive revision and mock test</td>
+                            <td>Full aptitude mock test</td>
+                            <td>Core CS concepts review</td>
+                            <td>System design presentation practice</td>
+                            <td>Week 4 assessment and Phase 3 planning</td>
+                            <td>
+                                <select class="status-select" data-day="28">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Phase 3: Advanced Topics -->
+        <div id="phase3" class="phase-section">
+            <h2 class="phase-title">Phase 3: Advanced Algorithms & Specialized Topics (Days 29-42)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>DSA (2 hrs)</th>
+                            <th>Aptitude (1 hr)</th>
+                            <th>Core CS (1.5 hrs)</th>
+                            <th>System Design (1 hr)</th>
+                            <th>HR/Soft Skills (30 mins)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="day-cell">29</td>
+                            <td class="topic-cell">Dynamic Programming: Fibonacci, 0/1 Knapsack</td>
+                            <td>Partnership: Profit sharing, Investment ratios</td>
+                            <td>Compiler Design: Lexical analysis, Parsing</td>
+                            <td>Design Search Engine: Crawling, indexing, ranking</td>
+                            <td>Emotional intelligence: Self-awareness, empathy</td>
+                            <td>
+                                <select class="status-select" data-day="29">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">30</td>
+                            <td class="topic-cell">DP: Longest Common Subsequence, Edit Distance</td>
+                            <td>Stocks & Shares: Dividend, Brokerage, Market value</td>
+                            <td>Compiler: Syntax analysis, Semantic analysis</td>
+                            <td>Design Rate Limiter: Algorithms, distributed systems</td>
+                            <td>Stress management: Techniques, work-life balance</td>
+                            <td>
+                                <select class="status-select" data-day="30">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">31</td>
+                            <td class="topic-cell">DP: House Robber, Coin Change, Palindrome Partitioning</td>
+                            <td>True Discount: Present worth, Banker's discount</td>
+                            <td>Computer Architecture: CPU design, Pipeline</td>
+                            <td>Design Notification System: Multi-channel, scalability</td>
+                            <td>Time management: Prioritization, productivity techniques</td>
+                            <td>
+                                <select class="status-select" data-day="31">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">32</td>
+                            <td class="topic-cell">DP: Longest Increasing Subsequence, Matrix Chain Multiplication</td>
+                            <td>Heights & Distances: Trigonometry applications</td>
+                            <td>Computer Architecture: Cache, Memory hierarchy</td>
+                            <td>Design Distributed Cache: Consistency, partitioning</td>
+                            <td>Critical thinking: Evaluation, analysis, decision making</td>
+                            <td>
+                                <select class="status-select" data-day="32">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">33</td>
+                            <td class="topic-cell">Graphs: BFS, DFS, Topological Sort</td>
+                            <td>Geometry: Area, Perimeter, Volume calculations</td>
+                            <td>Machine Learning: Supervised vs Unsupervised</td>
+                            <td>Design Message Queue: Kafka, RabbitMQ architecture</td>
+                            <td>Innovation: Creative problem solving, thinking outside box</td>
+                            <td>
+                                <select class="status-select" data-day="33">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">34</td>
+                            <td class="topic-cell">Graphs: Dijkstra's Algorithm, Bellman-Ford</td>
+                            <td>Coordinate Geometry: Distance, Midpoint, Slope</td>
+                            <td>ML: Linear Regression, Logistic Regression</td>
+                            <td>Design Monitoring System: Metrics, alerting, dashboards</td>
+                            <td>Customer focus: Understanding needs, service excellence</td>
+                            <td>
+                                <select class="status-select" data-day="34">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">35</td>
+                            <td class="topic-cell">Graphs: Union Find, Minimum Spanning Tree</td>
+                            <td>Mensuration: 2D and 3D shapes, Surface area</td>
+                            <td>ML: Decision Trees, Random Forest, SVM</td>
+                            <td>Design Content Delivery Network: Edge servers, caching</td>
+                            <td>Integrity: Ethical decisions, honesty in difficult situations</td>
+                            <td>
+                                <select class="status-select" data-day="35">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="rest-day">
+                            <td class="day-cell">36</td>
+                            <td class="topic-cell">Rest Day / Revision</td>
+                            <td>Comprehensive aptitude test</td>
+                            <td>Review week's concepts</td>
+                            <td>System design case study review</td>
+                            <td>Feedback analysis and improvement planning</td>
+                            <td>
+                                <select class="status-select" data-day="36">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">37</td>
+                            <td class="topic-cell">Bit Manipulation: Basics, Tricks, Problems</td>
+                            <td>Time & Work: Advanced problems, Race and work together</td>
+                            <td>Networking: Advanced protocols, Socket programming</td>
+                            <td>Design API Rate Limiter: Token bucket, Leaky bucket</td>
+                            <td>Conflict resolution: Handling workplace conflicts</td>
+                            <td>
+                                <select class="status-select" data-day="37">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">38</td>
+                            <td class="topic-cell">Segment Trees: Range Queries, Lazy Propagation</td>
+                            <td>Probability: Bayes' theorem, Problems</td>
+                            <td>Machine Learning: Clustering, Association rules</td>
+                            <td>Design Notification Service: Email, SMS, Push notifications</td>
+                            <td>Stress interview preparation: Techniques, mock drills</td>
+                            <td>
+                                <select class="status-select" data-day="38">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">39</td>
+                            <td class="topic-cell">Fenwick Tree: Point Update, Range Query</td>
+                            <td>Game Theory: Minimax, Nash Equilibrium</td>
+                            <td>ML: Neural Networks, Deep Learning intro</td>
+                            <td>Design Payment Gateway: Workflow, security</td>
+                            <td>Handling difficult questions: Strategies, practice</td>
+                            <td>
+                                <select class="status-select" data-day="39">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">40</td>
+                            <td class="topic-cell">Advanced DP: Bitmasking, DP on Trees</td>
+                            <td>Statistics: Mean, Median, Mode, Variance, Standard deviation</td>
+                            <td>Data Mining: Concepts, Techniques, Applications</td>
+                            <td>Design Video Conferencing: Architecture, key features</td>
+                            <td>Mock interview: Full technical interview simulation</td>
+                            <td>
+                                <select class="status-select" data-day="40">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="rest-day">
+                            <td class="day-cell">41</td>
+                            <td class="topic-cell">Rest Day / Revision</td>
+                            <td>Comprehensive aptitude test</td>
+                            <td>Review week's concepts</td>
+                            <td>System design case study review</td>
+                            <td>Feedback analysis and improvement planning</td>
+                            <td>
+                                <select class="status-select" data-day="41">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">42</td>
+                            <td class="topic-cell">Revision: All DSA topics, focus on weak areas</td>
+                            <td>Revision: All aptitude topics, shortcuts</td>
+                            <td>Revision: Core CS concepts, important topics</td>
+                            <td>Revision: System design, key frameworks</td>
+                            <td>Interview preparation: Mindset, confidence, strategies</td>
+                            <td>
+                                <select class="status-select" data-day="42">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Phase 4: Mastery & Mock Interviews -->
+        <div id="phase4" class="phase-section">
+            <h2 class="phase-title">Phase 4: Mastery & Mock Interviews (Days 43-60)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>DSA (2 hrs)</th>
+                            <th>Aptitude (1 hr)</th>
+                            <th>Core CS (1.5 hrs)</th>
+                            <th>System Design (1 hr)</th>
+                            <th>HR/Soft Skills (30 mins)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="day-cell">43</td>
+                            <td class="topic-cell">Mock Coding Interview 1: Time-bound problem solving</td>
+                            <td>Quantitative: Advanced problems, case studies</td>
+                            <td>OS/DBMS/Networks: Advanced MCQs & scenario questions</td>
+                            <td>System Design: Design review, feedback session</td>
+                            <td>HR: Behavioral questions, situational judgment</td>
+                            <td>
+                                <select class="status-select" data-day="43">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">44</td>
+                            <td class="topic-cell">Dynamic Programming: Advanced problems, interview questions</td>
+                            <td>Logical Reasoning: Advanced puzzles, problem solving</td>
+                            <td>OOP/Design Patterns: Advanced concepts, interview prep</td>
+                            <td>Design: Scalable web architecture, microservices</td>
+                            <td>STAR stories: Finalize and practice delivery</td>
+                            <td>
+                                <select class="status-select" data-day="44">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">45</td>
+                            <td class="topic-cell">Graphs: Advanced algorithms, interview questions</td>
+                            <td>Data Interpretation: Complex graphs, charts, case studies</td>
+                            <td>Computer Architecture: Advanced concepts, interview prep</td>
+                            <td>Design: Real-time data processing, analytics</td>
+                            <td>Communication: Clarity, conciseness, technical storytelling</td>
+                            <td>
+                                <select class="status-select" data-day="45">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">46</td>
+                            <td class="topic-cell">Coding: Company-specific interview questions</td>
+                            <td>Speed Math: Advanced shortcuts, mental math</td>
+                            <td>Compiler/OS: Advanced debugging, optimization</td>
+                            <td>Design: High-frequency trading platform</td>
+                            <td>Behavioral: Conflict resolution, teamwork</td>
+                            <td>
+                                <select class="status-select" data-day="46">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">47</td>
+                            <td class="topic-cell">Mock Coding Interview 2: Pair programming, system design</td>
+                            <td>Aptitude: Advanced problem solving, time management</td>
+                            <td>Core CS: Advanced topics, interview questions</td>
+                            <td>System Design: Scalability, reliability, trade-offs</td>
+                            <td>HR: Leadership principles, cultural fit</td>
+                            <td>
+                                <select class="status-select" data-day="47">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">48</td>
+                            <td class="topic-cell">Revision: All weak DSA topics, focus on patterns</td>
+                            <td>Revision: All weak aptitude topics, practice</td>
+                            <td>Revision: All weak CS topics, key concepts</td>
+                            <td>Revision: All weak system design topics, frameworks</td>
+                            <td>Personal branding: LinkedIn, resume, online presence</td>
+                            <td>
+                                <select class="status-select" data-day="48">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">49</td>
+                            <td class="topic-cell">Coding: Mock interviews with peers, timed sessions</td>
+                            <td>Peer quiz: Advanced topics, case studies</td>
+                            <td>Peer review: Mock interview feedback</td>
+                            <td>Peer design: System design review</td>
+                            <td>Peer HR: Behavioral interview practice</td>
+                            <td>
+                                <select class="status-select" data-day="49">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">50</td>
+                            <td class="topic-cell">Coding: Onsite interview simulation, full stack</td>
+                            <td>Aptitude: Onsite test simulation, advanced problems</td>
+                            <td>CS: Onsite interview simulation, core concepts</td>
+                            <td>System Design: Onsite simulation, design challenges</td>
+                            <td>HR: Onsite simulation, behavioral questions</td>
+                            <td>
+                                <select class="status-select" data-day="50">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">51</td>
+                            <td class="topic-cell">Final Revision: All DSA patterns, focus on weak areas</td>
+                            <td>Final Revision: All formulas, shortcuts, advanced problems</td>
+                            <td>Final Revision: Key CS concepts, system design</td>
+                            <td>Final Revision: Mock interview feedback, improvements</td>
+                            <td>Mindset: Visualization, confidence, stress management</td>
+                            <td>
+                                <select class="status-select" data-day="51">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="rest-day">
+                            <td class="day-cell">52</td>
+                            <td class="topic-cell">Rest Day / Reflection</td>
+                            <td>Light revision: Key formulas, concepts</td>
+                            <td>Light revision: Core CS topics</td>
+                            <td>Light revision: System design principles</td>
+                            <td>Mindfulness: Relaxation techniques, positive visualization</td>
+                            <td>
+                                <select class="status-select" data-day="52">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">53</td>
+                            <td class="topic-cell">Revision: All DSA topics, focus on weak areas</td>
+                            <td>Revision: All aptitude topics, shortcuts</td>
+                            <td>Revision: Core CS concepts, important topics</td>
+                            <td>Revision: System design, key frameworks</td>
+                            <td>Interview preparation: Mindset, confidence, strategies</td>
+                            <td>
+                                <select class="status-select" data-day="53">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">54</td>
+                            <td class="topic-cell">Mock Interviews: Full-length technical interviews</td>
+                            <td>Mock Interviews: Full-length aptitude tests</td>
+                            <td>Mock Interviews: Core CS concepts</td>
+                            <td>Mock Interviews: System design interviews</td>
+                            <td>Mock Interviews: Behavioral interviews</td>
+                            <td>
+                                <select class="status-select" data-day="54">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">55</td>
+                            <td class="topic-cell">Revision: All weak DSA topics, focus on patterns</td>
+                            <td>Revision: All weak aptitude topics, practice</td>
+                            <td>Revision: All weak CS topics, key concepts</td>
+                            <td>Revision: All weak system design topics, frameworks</td>
+                            <td>Personal branding: LinkedIn, resume, online presence</td>
+                            <td>
+                                <select class="status-select" data-day="55">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">56</td>
+                            <td class="topic-cell">Coding: Mock interviews with peers, timed sessions</td>
+                            <td>Peer quiz: Advanced topics, case studies</td>
+                            <td>Peer review: Mock interview feedback</td>
+                            <td>Peer design: System design review</td>
+                            <td>Peer HR: Behavioral interview practice</td>
+                            <td>
+                                <select class="status-select" data-day="56">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">57</td>
+                            <td class="topic-cell">Coding: Onsite interview simulation, full stack</td>
+                            <td>Aptitude: Onsite test simulation, advanced problems</td>
+                            <td>CS: Onsite interview simulation, core concepts</td>
+                            <td>System Design: Onsite simulation, design challenges</td>
+                            <td>HR: Onsite simulation, behavioral questions</td>
+                            <td>
+                                <select class="status-select" data-day="57">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">58</td>
+                            <td class="topic-cell">Final Revision: All DSA patterns, focus on weak areas</td>
+                            <td>Final Revision: All formulas, shortcuts, advanced problems</td>
+                            <td>Final Revision: Key CS concepts, system design</td>
+                            <td>Final Revision: Mock interview feedback, improvements</td>
+                            <td>Mindset: Visualization, confidence, stress management</td>
+                            <td>
+                                <select class="status-select" data-day="58">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="rest-day">
+                            <td class="day-cell">59</td>
+                            <td class="topic-cell">Rest Day / Reflection</td>
+                            <td>Light revision: Key formulas, concepts</td>
+                            <td>Light revision: Core CS topics</td>
+                            <td>Light revision: System design principles</td>
+                            <td>Mindfulness: Relaxation techniques, positive visualization</td>
+                            <td>
+                                <select class="status-select" data-day="59">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">60</td>
+                            <td class="topic-cell">Final Touch: Resume, LinkedIn, portfolio review</td>
+                            <td>Interview logistics: Confirm schedules, prepare documents</td>
+                            <td>Company research: Finalize top companies, tailor applications</td>
+                            <td>Mindset: Positive visualization, stress management</td>
+                            <td>Rest: Ensure proper rest, avoid burnout</td>
+                            <td>
+                                <select class="status-select" data-day="60">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Phase 5: Final Sprint & Mastery -->
+        <div id="phase5" class="phase-section">
+            <h2 class="phase-title">Phase 5: Final Sprint & Mastery (Days 61-70)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>DSA (2 hrs)</th>
+                            <th>Aptitude (1 hr)</th>
+                            <th>Core CS (1.5 hrs)</th>
+                            <th>System Design (1 hr)</th>
+                            <th>HR/Soft Skills (30 mins)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="day-cell">61</td>
+                            <td class="topic-cell">Mock Coding Test 1: LeetCode/Codeforces timed contest</td>
+                            <td>Quantitative: Mixed topic timed test</td>
+                            <td>OS/DBMS/Networks: Mixed MCQs & scenario questions</td>
+                            <td>System Design: Mock interview (record & review)</td>
+                            <td>HR: Mock HR interview (record & review)</td>
+                            <td>
+                                <select class="status-select" data-day="61">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">62</td>
+                            <td class="topic-cell">Dynamic Programming: Hard problems, patterns revision</td>
+                            <td>Logical Reasoning: Puzzles, seating, blood relations</td>
+                            <td>OOP/Design Patterns: Real-world scenarios</td>
+                            <td>Design: E-commerce checkout, payment flow</td>
+                            <td>STAR stories: Refine and practice delivery</td>
+                            <td>
+                                <select class="status-select" data-day="62">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">63</td>
+                            <td class="topic-cell">Graphs: Advanced problems, network flow, applications</td>
+                            <td>Data Interpretation: Graphs, charts, caselets</td>
+                            <td>Computer Architecture: Cache, pipelining, MCQs</td>
+                            <td>Design: Real-time chat, notifications</td>
+                            <td>Communication: Elevator pitch, Q&A practice</td>
+                            <td>
+                                <select class="status-select" data-day="63">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">64</td>
+                            <td class="topic-cell">Coding: Company-specific questions (Amazon, Google, etc.)</td>
+                            <td>Speed Math: Shortcuts, approximation, practice</td>
+                            <td>Compiler/OS: Debugging, error tracing</td>
+                            <td>Design: Scalable search, ranking systems</td>
+                            <td>Behavioral: Handling failure, feedback</td>
+                            <td>
+                                <select class="status-select" data-day="64">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">65</td>
+                            <td class="topic-cell">Mock Coding Test 2: InterviewBit/GeeksforGeeks timed</td>
+                            <td>Aptitude: Full-length mock test</td>
+                            <td>Core CS: Full-length mock test</td>
+                            <td>System Design: Whiteboard round simulation</td>
+                            <td>HR: Group discussion, leadership scenarios</td>
+                            <td>
+                                <select class="status-select" data-day="65">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">66</td>
+                            <td class="topic-cell">Revision: Weakest DSA topics, error log review</td>
+                            <td>Revision: Weakest aptitude topics</td>
+                            <td>Revision: Weakest CS topics</td>
+                            <td>Revision: Weakest system design topics</td>
+                            <td>Personal branding: LinkedIn, resume final polish</td>
+                            <td>
+                                <select class="status-select" data-day="66">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">67</td>
+                            <td class="topic-cell">Coding: Peer mock interview (buddy up)</td>
+                            <td>Peer quiz: Exchange and solve questions</td>
+                            <td>Peer review: Explain concepts to a friend</td>
+                            <td>Peer design: Review each other's designs</td>
+                            <td>Peer HR: Practice with a partner</td>
+                            <td>
+                                <select class="status-select" data-day="67">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">68</td>
+                            <td class="topic-cell">Coding: Onsite/virtual interview simulation</td>
+                            <td>Aptitude: Onsite/virtual test simulation</td>
+                            <td>CS: Onsite/virtual interview simulation</td>
+                            <td>System Design: Onsite/virtual simulation</td>
+                            <td>HR: Onsite/virtual simulation</td>
+                            <td>
+                                <select class="status-select" data-day="68">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">69</td>
+                            <td class="topic-cell">Final Revision: All DSA patterns, flashcards</td>
+                            <td>Final Revision: All formulas, shortcuts</td>
+                            <td>Final Revision: Key CS concepts, cheat sheets</td>
+                            <td>Final Revision: System design frameworks</td>
+                            <td>Final Revision: STAR stories, etiquette</td>
+                            <td>
+                                <select class="status-select" data-day="69">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="rest-day">
+                            <td class="day-cell">70</td>
+                            <td class="topic-cell">Rest & Reflection: Light revision, confidence boost</td>
+                            <td>Rest & Reflection: Light revision</td>
+                            <td>Rest & Reflection: Light revision</td>
+                            <td>Rest & Reflection: Light revision</td>
+                            <td>Mindset: Visualization, gratitude, readiness</td>
+                            <td>
+                                <select class="status-select" data-day="70">
+                                    <option value="pending">Pending</option>
+                                    <option value="done">Done</option>
+                                    <option value="skip">Skip</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update progress calculation for 70 days
+        let totalDays = 70;
+        let statusArr = Array(totalDays).fill('pending');
+
+        function updateStats() {
+            let completedDays = statusArr.filter(s => s === 'done').length;
+            let pendingDays = statusArr.filter(s => s === 'pending').length;
+            let percent = Math.round((completedDays / totalDays) * 100);
+            document.getElementById('completedDays').innerText = completedDays;
+            document.getElementById('remainingDays').innerText = pendingDays;
+            document.getElementById('progressPercent').innerText = percent + '%';
+            document.getElementById('progressFill').style.width = percent + '%';
+        }
+
+        function onStatusChange(e) {
+            const day = parseInt(e.target.getAttribute('data-day'), 10) - 1;
+            statusArr[day] = e.target.value;
+            updateStats();
+        }
+        function saveStatus(selectEl, key) {
+            localStorage.setItem(key, selectEl.value);
+        }
+
+        function loadStatus(key, selectEl) {
+            const saved = localStorage.getItem(key);
+                if (saved) selectEl.value = saved;
+        }
+
+// Call this on page load for each task:
+        window.onload = function () {
+            const allSelectors = document.querySelectorAll("select");
+            allSelectors.forEach((sel, i) => {
+            loadStatus("day" + i, sel);
+        });
+        }
+
+        function markProgress() {
+            // Mark next pending as done
+            const idx = statusArr.findIndex(s => s === 'pending');
+            if (idx !== -1) {
+                statusArr[idx] = 'done';
+                document.querySelector('.status-select[data-day="' + (idx + 1) + '"]').value = 'done';
+                updateStats();
+            }
+        }
+
+        function resetProgress() {
+            statusArr = Array(totalDays).fill('pending');
+            document.querySelectorAll('.status-select').forEach((sel, i) => sel.value = 'pending');
+            updateStats();
+        }
+
+        function showPhase(phase) {
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('phase' + i).classList.remove('active');
+                document.querySelectorAll('.phase-btn')[i - 1].classList.remove('active');
+            }
+            document.getElementById('phase' + phase).classList.add('active');
+            document.querySelectorAll('.phase-btn')[phase - 1].classList.add('active');
+        }
+
+        // Attach event listeners after DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.status-select').forEach(sel => {
+                sel.addEventListener('change', onStatusChange);
+            });
+            updateStats();
+        });
+    </script>
+</body>
+</html>
